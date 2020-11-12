@@ -14,39 +14,46 @@
 			include __DIR__."/resources/views/includes/header.phtml";
 		?>
 		<div class="container">
-			<h1>Listado de Usuarios</h1>
+			<div class="box box-primary content-table">
+				<h1>Listado de Usuarios</h1>
 			<div class="table-responsive-md">
   				<table class="table">
 					  <thead>
 					    <tr>
 					      <th scope="col">#</th>
-					      <th scope="col">First</th>
-					      <th scope="col">Last</th>
-					      <th scope="col">Handle</th>
+					      <th scope="col">Nombres</th>
+					      <th scope="col">Apellidos</th>
+					      <th scope="col">DNI</th>
+					      <th scope="col">Sexo</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr>
 					      <th scope="row">1</th>
-					      <td>Mark</td>
-					      <td>Otto</td>
-					      <td>@mdo</td>
+					      <td>Carlos Augusto</td>
+					      <td>Blondet Ríos</td>
+					      <td>44008257</td>
+					      <td>Masculino</td>
 					    </tr>
 					    <tr>
 					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
+					      <td>Edu José</td>
+					      <td>Villegas Zea</td>
+					      <td>70498969</td>
+					      <td>Masculino</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">3</th>
-					      <td>Larry</td>
-					      <td>the Bird</td>
-					      <td>@twitter</td>
+					      <th scope="row">2</th>
+					      <td>Lucía Andrea</td>
+					      <td>Quinto Ascurra</td>
+					      <td>72446512</td>
+					      <td>Femenino</td>
 					    </tr>
 					  </tbody>
 				</table>
 			</div>
+			</div>
+			
 		</div>
 		<?php
 			include __DIR__."/resources/views/includes/script.phtml";

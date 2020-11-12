@@ -11,7 +11,12 @@
 				$_SESSION["user"]["name"] = $userPost;
 				unset($_POST["user"]);
 				unset($_POST["password"]);
-				header("Location: home.php");
+				$response = ["rst" => 1, "msj" => "Haz accedido Correctamente"];
+				echo json_encode($response); exit;
+				//header("Location: home.php");
+			} else {
+				$response = ["rst" => 2, "msj" => "Tus credenciales son Incorrectas!!!"];
+				echo json_encode($response); exit;
 			}
 		}
 	}
@@ -57,12 +62,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
 </head>
 <body class="login">
 	<div class="content-login">
 		<h1>Acceso al Sistema</h1>
 		<div class="container">
-			<form action="login.php" method="POST">
+			<form action="login.php" method="POST" id="form-login">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -84,8 +90,45 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/sweetalert2.all.min.js"></script>
+	<script type="text/javascript">
+		$("#form-login").submit(function() {
+			
+			$.ajax({
+				type : $("#form-login").attr("method"),
+				url : $("#form-login").attr("action"),
+				data : $("#form-login").serialize(),
+				success : function(obj){
+					console.log(obj);
+					console.log(JSON.parse(obj));
+					var obj2 = JSON.parse(obj);
+					if (parseInt(obj2.rst) == 1) {
+						Swal.fire(
+						  'Muy Bien!',
+						  obj2.msj,
+						  'success'
+						);
+						setTimeout(function() {
+							window.location.href="home.php";
+						}, 500);
+					} else {
+						Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text: obj2.msj,
+						  footer: '<a href>Why do I have this issue?</a>'
+						});
+					}
+					/*
+					*/
+					
+				}
+			});
+			return false;
+		});
+	</script>
 </body>
 </html>
