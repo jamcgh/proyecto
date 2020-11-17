@@ -1,0 +1,62 @@
+{
+	"1" : {
+		"nombres" : "Carlos Augusto",
+		"ape_paterno" : "Blondet",
+		"ape_materno" : "Ríos",
+		"sexo" : "Masculino"
+	},
+	"2" : {
+		"nombres" : "Julio Alberto Móises",
+		"ape_paterno" : "Calderón",
+		"ape_materno" : "Gonzales",
+		"sexo" : "Masculino"
+	},
+	"3" : {
+		"nombres" : "Giancarlo Vitto",
+		"ape_paterno" : "Díaz",
+		"ape_materno" : "Vasquez",
+		"sexo" : "Masculino"
+	},
+	"4" : {
+		"nombres" : "Edson Alberto",
+		"ape_paterno" : "Forno",
+		"ape_materno" : "Quiñones",
+		"sexo" : "Masculino"
+	},
+	"5" : {
+		"nombres" : "Katia Elizabeth",
+		"ape_paterno" : "Garvich",
+		"ape_materno" : "San Martín",
+		"sexo" : "Femenino"
+	},
+	"6" : {
+		"nombres" : "Joseph Jesús",
+		"ape_paterno" : "Jimenez",
+		"ape_materno" : "Sanchez",
+		"sexo" : "Masculino"
+	},
+	"7" : {
+		"nombres" : "Luis Alfredo",
+		"ape_paterno" : "Pardón",
+		"ape_materno" : "La Rosa",
+		"sexo" : "Masculino"
+	},
+	"8" : {
+		"nombres" : "Lucía Andrea",
+		"ape_paterno" : "Quinto",
+		"ape_materno" : "Ascurra",
+		"sexo" : "Femenino"
+	},
+	"9" : {
+		"nombres" : "Fernando Jacobo",
+		"ape_paterno" : "Quiroz",
+		"ape_materno" : "Cabanillas",
+		"sexo" : "Masculino"
+	},
+	"10" : {
+		"nombres" : "Edu José",
+		"ape_paterno" : "Villegas",
+		"ape_materno" : "Zea",
+		"sexo" : "Masculino"
+	}
+}

@@ -14,6 +14,10 @@
 			include __DIR__."/resources/views/includes/header.phtml";
 		?>
 		<div class="container">
+			<?php 
+				//echo file_get_contents(__DIR__."/resources/assets/js/usuario.json"); exit;
+				$usuariosData = json_decode(file_get_contents(__DIR__."/resources/assets/js/usuario.json"), true);
+			?>
 			<div class="box box-primary content-table">
 				<h1>Listado de Usuarios</h1>
 			<div class="table-responsive-md">
@@ -22,54 +26,33 @@
 					    <tr>
 					      <th>#</th>
 					      <th>Nombres</th>
-					      <th>Apellidos</th>
-					      <th>DNI</th>
+					      <th>Ape Paterno</th>
+					      <th>Ape Materno</th>
 					      <th>Sexo</th>
 					      <th>[]</th>
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr>
-					      <th>1</th>
-					      <td>Carlos Augusto</td>
-					      <td>Blondet Ríos</td>
-					      <td>44008257</td>
-					      <td>Masculino</td>
-					      <td>
-					      	<a href="#" data-toogle="modal" data-target="#mdlUsuario" class="btn btn-primary">
-					      		<i class="fas fa-eye"></i>
-					      	</a>
-					      	<button class="btn btn-danger">
-					      		<i class="fas fa-trash"></i>
-					      	</button>
-					      </td>
-					    </tr>
-					    <tr>
-					      <th>2</th>
-					      <td>Edu José</td>
-					      <td>Villegas Zea</td>
-					      <td>70498969</td>
-					      <td>Masculino</td>
-					      <td>
-					      	<a href="#" data-toogle="modal" data-target="#mdlUsuario" class="btn btn-primary"><i class="fas fa-eye"></i>
-					      	</a>
-					      	<button class="btn btn-danger">
-					      		<i class="fas fa-trash"></i>
-					      	</button>
-					      </td>
-					    </tr>
-					    <tr>
-					      <th>3</th>
-					      <td>Lucía Andrea</td>
-					      <td>Quinto Ascurra</td>
-					      <td>72446512</td>
-					      <td>Femenino</td>
-					      <td><a href="#" data-toogle="modal" data-target="#mdlUsuario" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-					      	<button class="btn btn-danger">
-					      		<i class="fas fa-trash"></i>
-					      	</button>
-					      </td>
-					    </tr>
+					  		<?php 
+					  			//print_r($usuariosData); exit;
+					    		foreach ($usuariosData as $key => $value) {
+					    	?>
+						    <tr>
+						      <th><?php echo $key;?></th>
+						      <td><?php echo $value["nombres"];?></td>
+						      <td><?php echo $value["ape_paterno"];?></td>
+						      <td><?php echo $value["ape_materno"];?></td>
+						      <td><?php echo $value["sexo"];?></td>
+						      <td>
+						      	<a href="#" data-toggle="modal" data-target="#mdlUsuario" class="btn btn-primary">
+						      		<i class="fas fa-eye"></i>
+						      	</a>
+						      	<button class="btn btn-danger">
+						      		<i class="fas fa-trash"></i>
+						      	</button>
+						      </td>
+						    </tr>
+						<?php } ?>
 					  </tbody>
 				</table>
 			</div>
