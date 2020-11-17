@@ -1,5 +1,43 @@
 <?php 
 	include __DIR__."/functions/session_helper.php";
+	if (isset($_GET)) {
+		if (count($_GET) > 0) {
+			if (isset($_GET["id"])) {
+				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
+				$usuariosData = json_decode($usuarioJson, true);
+				$tmpId = $_GET["id"];
+				if (isset($usuariosData[$tmpId])) {
+					$usuariosData[$tmpId]["id"] = $tmpId;
+					echo json_encode($usuariosData[$tmpId]);
+					exit;
+				}
+
+			}
+		}
+	}
+	if (isset($_POST)) {
+		if (count($_POST) > 0) {
+			if (isset($_POST["id"])) {
+				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
+				$usuariosData = json_decode($usuarioJson, true);
+
+				$tmpId = (int)$_POST["id"];
+				$tmpItem = $usuariosData[$tmpId];
+				//print_r($tmpItem);
+				$tmpItem["nombres"] = $_POST["nombres"];
+				//print_r($tmpItem); exit;
+				$usuariosData[$tmpId] = $tmpItem;
+				$usuarioJson = json_encode($usuariosData);
+				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
+				$response = ["rst" => 1, "msj"=>"Usuario Actualizado"];
+				echo json_encode($response);
+				exit;
+			}
+			$response = ["rst" => 2, "msj"=>"Error"];
+			echo json_encode($response);
+			exit;
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,8 +83,12 @@
 							      <td><?php echo $value["ape_materno"];?></td>
 							      <td><?php echo $value["sexo"];?></td>
 							      <td>
-							      	<a href="#" data-toggle="modal" data-target="#mdlUsuario" class="btn btn-primary" data-id="<?php echo $value['id'];?>">
-							      		<i class="fas fa-eye"></i>
+							      	<a href="#"
+							      		data-toggle="modal"
+							      		data-target="#mdlUsuario"
+							      		class="btn btn-primary"
+							      		data-id="<?php echo $key;?>">
+							      		<i class="fas fa-pencil-alt"></i>
 							      	</a>
 							      	<button class="btn btn-danger">
 							      		<i class="fas fa-trash"></i>
