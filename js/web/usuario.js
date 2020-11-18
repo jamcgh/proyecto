@@ -1,20 +1,25 @@
 $('#mdlUsuario').on('show.bs.modal', function (event) {
 	var id = $(event.relatedTarget).data("id");
-	showLoading();
-	var usuario = $.ajax({
-		type : "GET",
-		url : "usuario.php",
-		data : {id: id},
-		success : function(obj) {
-			var objData = JSON.parse(obj);
-			$("#txt_id").val(objData.id);
-			$("#txt_nombres").val(objData.nombres);
-			$("#txt_ape_paterno").val(objData.ape_paterno);
-			$("#txt_ape_materno").val(objData.ape_materno);
-			$("#slct_sexo").val(objData.sexo);
-			removeLoading();
-		}
-	});
+	if (typeof id !=undefined && typeof id !="undefined") {
+		showLoading();
+		var usuario = $.ajax({
+			type : "GET",
+			url : "usuario.php",
+			data : {id: id},
+			success : function(obj) {
+				var objData = JSON.parse(obj);
+				$("#txt_id").val(objData.id);
+				$("#txt_nombres").val(objData.nombres);
+				$("#txt_ape_paterno").val(objData.ape_paterno);
+				$("#txt_ape_materno").val(objData.ape_materno);
+				$("#slct_sexo").val(objData.sexo);
+				removeLoading();
+			}
+		});
+	} else {
+
+	}
+
 });
 $('#mdlUsuario').on('show.bs.modal', function (event) {
 	$("input[type=text], select, #txt_id").val("");
@@ -37,16 +42,15 @@ $("#form-usuario").submit(function() {
 					'success'
 				);
 				removeLoading();
-				/*setTimeout(function() {
+				setTimeout(function() {
 					showLoading();
 					window.location.href="usuario.php";
-				}, 1000);*/
+				}, 2000);
 			} else {
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
-					text: objData.msj,
-					footer: '<a href>Why do I have this issue?</a>'
+					text: objData.msj
 				});
 				removeLoading();
 			}

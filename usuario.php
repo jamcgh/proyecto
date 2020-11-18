@@ -17,19 +17,36 @@
 	}
 	if (isset($_POST)) {
 		if (count($_POST) > 0) {
-			if (isset($_POST["id"])) {
-				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-				$usuariosData = json_decode($usuarioJson, true);
-
-				$tmpId = (int)$_POST["id"];
+			$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
+			$usuariosData = json_decode($usuarioJson, true);
+			if (isset($_POST["id"]) && $_POST["id"] !="") {
+				$tmpId = (int)$tmpId;
 				$tmpItem = $usuariosData[$tmpId];
 				//print_r($tmpItem);
 				$tmpItem["nombres"] = $_POST["nombres"];
+				$tmpItem["ape_paterno"] = $_POST["ape_paterno"];
+				$tmpItem["ape_materno"] = $_POST["ape_materno"];
+				$tmpItem["sexo"] = $_POST["sexo"];
+				$tmpItem["updated_at"] = date("Y-m-d H:i:s");
 				//print_r($tmpItem); exit;
 				$usuariosData[$tmpId] = $tmpItem;
-				$usuarioJson = json_encode($usuariosData);
+				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
 				$response = ["rst" => 1, "msj"=>"Usuario Actualizado"];
+				echo json_encode($response);
+				exit;
+			} else {
+				$tmpItem = [];
+				$tmpItem["nombres"] = $_POST["nombres"];
+				$tmpItem["ape_paterno"] = $_POST["ape_paterno"];
+				$tmpItem["ape_materno"] = $_POST["ape_materno"];
+				$tmpItem["sexo"] = $_POST["sexo"];
+				$tmpItem["created_at"] = date("Y-m-d H:i:s");
+
+				$usuariosData[] = $tmpItem;
+				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
+				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
+				$response = ["rst" => 1, "msj"=>"Usuario Creado"];
 				echo json_encode($response);
 				exit;
 			}
@@ -58,7 +75,12 @@
 				$usuariosData = json_decode($usuarioJson, true);
 			?>
 			<div class="box box-primary content-table">
-				<h1>Listado de Usuarios</h1>
+				<h1>Listado de Usuarios <div style="width: auto; display: inline-block; float: right;">
+					<a href="#" class="btn btn-primary"
+						data-toggle="modal"
+						data-target="#mdlUsuario">
+						<i class="fas fa-plus"></i> Agregar</a>
+					</div></h1>
 			<div class="table-responsive-md">
   				<table id="table-usuarios" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>
@@ -77,7 +99,7 @@
 						    		foreach ($usuariosData as $key => $value) {
 						    	?>
 							    <tr>
-							      <th><?php echo $key;?></th>
+							      <th><?php echo (int)($key+1);?></th>
 							      <td><?php echo $value["nombres"];?></td>
 							      <td><?php echo $value["ape_paterno"];?></td>
 							      <td><?php echo $value["ape_materno"];?></td>
