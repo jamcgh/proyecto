@@ -58,3 +58,6 @@ $("#form-usuario").submit(function() {
 	})
 	return false;
 });
+$(".btn-delete").click(function(e) {
+	var id = $(e.relatedTarget).data("id");
+})

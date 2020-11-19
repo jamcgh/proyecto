@@ -20,16 +20,15 @@
 			$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
 			$usuariosData = json_decode($usuarioJson, true);
 			if (isset($_POST["id"]) && $_POST["id"] !="") {
-				$tmpId = (int)$tmpId;
+				$tmpId = $_POST["id"];
 				$tmpItem = $usuariosData[$tmpId];
 				//print_r($tmpItem);
-				$tmpItem["nombres"] = $_POST["nombres"];
-				$tmpItem["ape_paterno"] = $_POST["ape_paterno"];
-				$tmpItem["ape_materno"] = $_POST["ape_materno"];
-				$tmpItem["sexo"] = $_POST["sexo"];
-				$tmpItem["updated_at"] = date("Y-m-d H:i:s");
+				$usuariosData[$tmpId]["nombres"] = $_POST["nombres"];
+				$usuariosData[$tmpId]["ape_paterno"] = $_POST["ape_paterno"];
+				$usuariosData[$tmpId]["ape_materno"] = $_POST["ape_materno"];
+				$usuariosData[$tmpId]["sexo"] = $_POST["sexo"];
+				$usuariosData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
 				//print_r($tmpItem); exit;
-				$usuariosData[$tmpId] = $tmpItem;
 				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
 				$response = ["rst" => 1, "msj"=>"Usuario Actualizado"];
@@ -42,8 +41,12 @@
 				$tmpItem["ape_materno"] = $_POST["ape_materno"];
 				$tmpItem["sexo"] = $_POST["sexo"];
 				$tmpItem["created_at"] = date("Y-m-d H:i:s");
+				$tmpItem["updated_at"] = "";
+				$tmpItem["deleted_at"] = "";
 
-				$usuariosData[] = $tmpItem;
+				$size = count($usuariosData);
+				$size = $size +1;
+				$usuariosData[$size] = $tmpItem;
 				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
 				$response = ["rst" => 1, "msj"=>"Usuario Creado"];
@@ -90,6 +93,7 @@
 						      <th>Ape Paterno</th>
 						      <th>Ape Materno</th>
 						      <th>Sexo</th>
+						      <th>U.Act.</th>
 						      <th>[]</th>
 						    </tr>
 						</thead>
@@ -97,13 +101,16 @@
 						  		<?php 
 						  			//print_r($usuariosData); exit;
 						    		foreach ($usuariosData as $key => $value) {
+						    			$tmpIndex = (int)$key;
+						    			//$tmpIndex = $tmpIndex+1;
 						    	?>
 							    <tr>
-							      <th><?php echo (int)($key+1);?></th>
+							      <th><?php echo $tmpIndex;?></th>
 							      <td><?php echo $value["nombres"];?></td>
 							      <td><?php echo $value["ape_paterno"];?></td>
 							      <td><?php echo $value["ape_materno"];?></td>
 							      <td><?php echo $value["sexo"];?></td>
+							      <td><?php echo $value["updated_at"];?></td>
 							      <td>
 							      	<a href="#"
 							      		data-toggle="modal"
@@ -112,9 +119,9 @@
 							      		data-id="<?php echo $key;?>">
 							      		<i class="fas fa-pencil-alt"></i>
 							      	</a>
-							      	<button class="btn btn-danger">
+							      	<a class="btn btn-danger btn-delete" data-id="<?php echo $key;?>">
 							      		<i class="fas fa-trash"></i>
-							      	</button>
+							      	</a>
 							      </td>
 							    </tr>
 							<?php } ?>
