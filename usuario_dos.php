@@ -22,18 +22,8 @@
 			include __DIR__."/resources/views/includes/header.phtml";
 		?>
 		<div class="container">
-			<?php 
-				//echo file_get_contents(__DIR__."/resources/assets/js/usuario.json"); exit;
-				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-				$usuariosData = json_decode($usuarioJson, true);
-			?>
 			<div class="box box-primary content-table">
-				<h1>Listado de Usuarios <div style="width: auto; display: inline-block; float: right;">
-					<a href="#" class="btn btn-primary"
-						data-toggle="modal"
-						data-target="#mdlUsuario">
-						<i class="fas fa-plus"></i> Agregar</a>
-					</div></h1>
+				<h1>Listado de Usuarios</h1>
 				<div class="table-responsive-md">
 	  				<table id="table-usuarios" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>

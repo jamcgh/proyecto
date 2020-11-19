@@ -16,8 +16,6 @@ $('#mdlUsuario').on('show.bs.modal', function (event) {
 				removeLoading();
 			}
 		});
-	} else {
-
 	}
 
 });
@@ -59,5 +57,16 @@ $("#form-usuario").submit(function() {
 	return false;
 });
 $(".btn-delete").click(function(e) {
-	var id = $(e.relatedTarget).data("id");
+	var id = $(e.target).data("id");
+	Swal.fire({
+	  title: '¿Quiere eliminar este Registro?',
+	  showCancelButton: true,
+	  confirmButtonText: `Eliminar`,
+	  cancelButtonText: `Cancelar`,
+	}).then((result) => {
+	  /* Read more about isConfirmed, isDenied below */
+	  if (result.isConfirmed) {
+	    	alert(id);
+	  }
+	});
 })

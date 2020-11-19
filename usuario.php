@@ -102,7 +102,7 @@
 						  			//print_r($usuariosData); exit;
 						    		foreach ($usuariosData as $key => $value) {
 						    			$tmpIndex = (int)$key;
-						    			//$tmpIndex = $tmpIndex+1;
+						    			$tmpIndex = $tmpIndex+1;
 						    	?>
 							    <tr>
 							      <th><?php echo $tmpIndex;?></th>
