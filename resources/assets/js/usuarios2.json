@@ -1,0 +1,92 @@
+{
+	"1" : {
+		"nombres" : "Carlos Augusto",
+		"ape_paterno" : "Blondet",
+		"ape_materno" : "Ríos",
+		"usuario" : "cblondet",
+		"dni" : "12345678",
+		"perfil" : "perfil 1",
+		"sexo" : "Masculino"
+	},
+	"2" : {
+		"nombres" : "Julio Alberto Móises",
+		"ape_paterno" : "Calderón",
+		"ape_materno" : "Gonzales",
+		"usuario" : "jcalderon",
+		"dni" : "12345678",
+		"perfil" : "perfil 2",
+		"sexo" : "Masculino"
+	},
+	"3" : {
+		"nombres" : "Giancarlo Vitto",
+		"ape_paterno" : "Díaz",
+		"ape_materno" : "Vasquez",
+		"usuario" : "gdiaz",
+		"dni" : "12345678",
+		"perfil" : "perfil 3",
+		"sexo" : "Masculino"
+	},
+	"4" : {
+		"nombres" : "Edson Alberto",
+		"ape_paterno" : "Forno",
+		"ape_materno" : "Quiñones",
+		"usuario" : "eforno",
+		"dni" : "12345678",
+		"perfil" : "perfil 1",
+		"sexo" : "Masculino"
+	},
+	"5" : {
+		"nombres" : "Katia Elizabeth",
+		"ape_paterno" : "Garvich",
+		"ape_materno" : "San Martín",
+		"usuario" : "kgarvich",
+		"dni" : "12345678",
+		"perfil" : "perfil 2",
+		"sexo" : "Femenino"
+	},
+	"6" : {
+		"nombres" : "Joseph Jesús",
+		"ape_paterno" : "Jimenez",
+		"ape_materno" : "Sanchez",
+		"usuario" : "jjimenez",
+		"dni" : "12345678",
+		"perfil" : "perfil 3",
+		"sexo" : "Masculino"
+	},
+	"7" : {
+		"nombres" : "Luis Alfredo",
+		"ape_paterno" : "Pardón",
+		"ape_materno" : "La Rosa",
+		"usuario" : "apardon",
+		"dni" : "12345678",
+		"perfil" : "perfil 1",
+		"sexo" : "Masculino"
+	},
+	"8" : {
+		"nombres" : "Lucía Andrea",
+		"ape_paterno" : "Quinto",
+		"ape_materno" : "Ascurra",
+		"usuario" : "lquinto",
+		"dni" : "12345678",
+		"perfil" : "perfil 2",
+		"sexo" : "Femenino"
+	},
+	"9" : {
+		"nombres" : "Fernando Jacobo",
+		"ape_paterno" : "Quiroz",
+		"ape_materno" : "Cabanillas",
+		"usuario" : "fquiroz",
+		"dni" : "12345678",
+		"perfil" : "perfil 3",
+		"sexo" : "Masculino"
+	},
+	"10" : {
+		"nombres" : "Edu José",
+		"ape_paterno" : "Villegas",
+		"ape_materno" : "Zea",
+		"usuario" : "evillegas",
+		"dni" : "12345678",
+		"perfil" : "perfil 1",
+		"sexo" : "Masculino"
+	}
+}
