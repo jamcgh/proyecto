@@ -46,6 +46,11 @@
 				$usuariosData[$tmpId]["ape_paterno"] = $_POST["ape_paterno"];
 				$usuariosData[$tmpId]["ape_materno"] = $_POST["ape_materno"];
 				$usuariosData[$tmpId]["sexo"] = $_POST["sexo"];
+				$usuariosData[$tmpId]["carrera"] = $_POST["carrera"];
+				$usuariosData[$tmpId]["grado"] = $_POST["grado"];
+				$usuariosData[$tmpId]["universidad"] = $_POST["universidad"];
+				$usuariosData[$tmpId]["anio_egreso"] = (int)$_POST["anio_egreso"];
+
 				$usuariosData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
 				//print_r($tmpItem); exit;
 				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
@@ -59,6 +64,11 @@
 				$tmpItem["ape_paterno"] = $_POST["ape_paterno"];
 				$tmpItem["ape_materno"] = $_POST["ape_materno"];
 				$tmpItem["sexo"] = $_POST["sexo"];
+				$tmpItem["carrera"] = $_POST["carrera"];
+				$tmpItem["grado"] = $_POST["grado"];
+				$tmpItem["universidad"] = $_POST["universidad"];
+				$tmpItem["anio_egreso"] = (int)$_POST["anio_egreso"];
+				
 				$tmpItem["created_at"] = date("Y-m-d H:i:s");
 				$tmpItem["updated_at"] = "";
 				$tmpItem["deleted_at"] = "";

@@ -10,38 +10,33 @@
       </div>
       <div class="modal-body">
           <form id="form-usuario" method="POST" url="functions/usuario_class.php">
-              <input type="hidden" name="id" id="txt_id" value="">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Nombres*</label>
-                        <input type="text" name="nombres" id="txt_nombres" required class="form-control">
-                    </div>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos Generales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profesionales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contacto</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <?php 
+                          include __DIR__."/../partials/tab_usuario_general.phtml";
+                        ?>
                   </div>
-                  <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Ape Paterno*</label>
-                        <input type="text" name="ape_paterno" id="txt_ape_paterno" required class="form-control">
-                    </div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <?php 
+                            include __DIR__."/../partials/tab_usuario_profesional.phtml";
+                          ?>
                   </div>
-                  <div class="col-md-12">
-                       <div class="form-group">
-                          <label>Ape Materno*</label>
-                          <input type="text" name="ape_materno" id="txt_ape_materno" required class="form-control">
-                      </div>
+                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    
                   </div>
-                  <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Sexo*</label>
-                        <select class="form-control" id="slct_sexo" name="sexo">
-                            <option value="Seleccione"></option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                        </select>
-                      </div>
-                  </div>
-                  
               </div>
+              <input type="hidden" name="id" id="txt_id" value="">
           </form>
       </div>
       <div class="modal-footer">
