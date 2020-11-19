@@ -64,9 +64,22 @@ $(".btn-delete").click(function(e) {
 	  confirmButtonText: `Eliminar`,
 	  cancelButtonText: `Cancelar`,
 	}).then((result) => {
-	  /* Read more about isConfirmed, isDenied below */
-	  if (result.isConfirmed) {
-	    	alert(id);
-	  }
+		showLoading();
+		  /* Read more about isConfirmed, isDenied below */
+		  if (result.isConfirmed) {
+		    	$.ajax({
+		    		type : "GET",
+		    		url : "usuario.php?action=delete&id="+id,
+		    		success : function(obj) {
+		    			var objData = JSON.parse(obj);
+		    			Swal.fire(
+							'Muy Bien!',
+							objData.msj,
+							'success'
+						);
+		    			removeLoading();
+		    		}
+		    	})
+		  }
 	});
 })
