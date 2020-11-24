@@ -127,7 +127,7 @@
 						    </tr>
 						</thead>
 						<tbody>
-						  		<?php 
+						  	<?php /*
 						  			//print_r($usuariosData); exit;
 						    		foreach ($usuariosData as $key => $value) {
 						    			$tmpIndex = (int)$key;
@@ -154,7 +154,7 @@
 							      </td>
 							    </tr>
 							<?php }
-							} ?>
+							} */?>
 						</tbody>
 				</table>
 			</div>
@@ -175,12 +175,7 @@
 			    },
 			    responsive: true
 			});
-			$(document).ready(function() {
-			    
-			 
-			    //new $.fn.dataTable.FixedHeader( table );
-			} );
 		</script>
-		<script type="text/javascript" src="js/web/usuario.js"></script>
+		<script type="text/javascript" src="js/web/usuario_list.js"></script>
 	</body>
 </html>
