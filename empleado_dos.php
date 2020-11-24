@@ -2,9 +2,9 @@
 	include __DIR__."/functions/session_helper.php";
 	if (isset($_POST)) {
 		if (count($_POST) > 0) {
-			$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/ajax_data_dos.json");
-			$usuariosData = json_decode($usuarioJson, true);
-			echo json_encode($usuariosData);
+			$empleadoJson = file_get_contents(__DIR__."/resources/assets/js/ajax_empleado_dos.json");
+			$empleadosData = json_decode($empleadoJson, true);
+			echo json_encode($empleadosData);
 			exit;
 		}
 	}
@@ -31,7 +31,7 @@
 						<i class="fas fa-plus"></i> Agregar</a>
 					</div></h1>
 				<div class="table-responsive-md">
-	  				<table id="table-usuarios-dos" class="table table-striped table-bordered nowrap" style="width:100%">
+	  				<table id="table-empleados-dos" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>
 				            <tr>
 				                <th>Nombre</th>
@@ -57,24 +57,24 @@
 			</div>
 		</div>
 		<?php 
-			include __DIR__."/resources/views/modal/mdl_usuario.phtml";
+			include __DIR__."/resources/views/modal/mdl_empleado.phtml";
 		?>
 		<?php
 			include __DIR__."/resources/views/includes/script.phtml";
 			include __DIR__."/resources/views/includes/loading.phtml";
 		?>
 		<script type="text/javascript">
-			var table = $('#table-usuarios').DataTable({
-		        "ajax": 'resources/assets/js/ajax_data.json',
+			var table = $('#table-empleados').DataTable({
+		        "ajax": 'resources/assets/js/ajax_empleado.json',
 		        responsive: true
 		    });
 
-		    var tableDos = $('#table-usuarios-dos').DataTable( {
+		    var tableDos = $('#table-empleados-dos').DataTable( {
 		        "processing": true,
 		        "serverSide": true,
 		        "responsive" : true,
 		        "ajax": {
-		            "url": "usuario_dos.php",
+		            "url": "empleado_dos.php",
 		            "type": "POST"
 		        },
 		        "columns": [

@@ -5,14 +5,13 @@
 			if (isset($_GET["action"])) {
 				switch ($_GET["action"]) {
 					case 'delete':
-						$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-						$usuariosData = json_decode($usuarioJson, true);
+						$empleadoJson = file_get_contents(__DIR__."/resources/assets/js/empleado.json");
+						$empleadosData = json_decode($empleadoJson, true);
 						$tmpId = $_GET["id"];
-						$usuariosData[$tmpId]["deleted_at"] = date("Y-m-d H:i:s");
-						$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
-						echo $usuarioJson; exit;
-						file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
-						$response = ["rst" => 1, "msj"=>"Usuario Eliminado"];
+						$empleadosData[$tmpId]["deleted_at"] = date("Y-m-d H:i:s");
+						$empleadoJson = json_encode($empleadosData, JSON_UNESCAPED_UNICODE);
+						file_put_contents(__DIR__."/resources/assets/js/empleado.json", $empleadoJson);
+						$response = ["rst" => 1, "msj"=>"empleado Eliminado"];
 						echo json_encode($response);
 						exit;
 						break;
@@ -21,13 +20,14 @@
 						# code...
 						break;
 				}
-			} elseif (isset($_GET["id"])) {
-				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-				$usuariosData = json_decode($usuarioJson, true);
+			}
+			if (isset($_GET["id"])) {
+				$empleadoJson = file_get_contents(__DIR__."/resources/assets/js/empleado.json");
+				$empleadosData = json_decode($empleadoJson, true);
 				$tmpId = $_GET["id"];
-				if (isset($usuariosData[$tmpId])) {
-					$usuariosData[$tmpId]["id"] = $tmpId;
-					echo json_encode($usuariosData[$tmpId]);
+				if (isset($empleadosData[$tmpId])) {
+					$empleadosData[$tmpId]["id"] = $tmpId;
+					echo json_encode($empleadosData[$tmpId]);
 					exit;
 				}
 
@@ -36,26 +36,23 @@
 	}
 	if (isset($_POST)) {
 		if (count($_POST) > 0) {
-			$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-			$usuariosData = json_decode($usuarioJson, true);
+			$empleadoJson = file_get_contents(__DIR__."/resources/assets/js/empleado.json");
+			$empleadosData = json_decode($empleadoJson, true);
 			if (isset($_POST["id"]) && $_POST["id"] !="") {
 				$tmpId = $_POST["id"];
-				$tmpItem = $usuariosData[$tmpId];
+				$tmpItem = $empleadosData[$tmpId];
 				//print_r($tmpItem);
-				$usuariosData[$tmpId]["nombres"] = $_POST["nombres"];
-				$usuariosData[$tmpId]["ape_paterno"] = $_POST["ape_paterno"];
-				$usuariosData[$tmpId]["ape_materno"] = $_POST["ape_materno"];
-				$usuariosData[$tmpId]["sexo"] = $_POST["sexo"];
-				$usuariosData[$tmpId]["carrera"] = $_POST["carrera"];
-				$usuariosData[$tmpId]["grado"] = $_POST["grado"];
-				$usuariosData[$tmpId]["universidad"] = $_POST["universidad"];
-				$usuariosData[$tmpId]["anio_egreso"] = (int)$_POST["anio_egreso"];
+				$empleadosData[$tmpId]["nombres"] = $_POST["nombres"];
+				$empleadosData[$tmpId]["ape_paterno"] = $_POST["ape_paterno"];
+				$empleadosData[$tmpId]["ape_materno"] = $_POST["ape_materno"];
+				$empleadosData[$tmpId]["sexo"] = $_POST["sexo"];
 
-				$usuariosData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
+
+				$empleadosData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
 				//print_r($tmpItem); exit;
-				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
-				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
-				$response = ["rst" => 1, "msj"=>"Usuario Actualizado"];
+				$empleadoJson = json_encode($empleadosData, JSON_UNESCAPED_UNICODE);
+				file_put_contents(__DIR__."/resources/assets/js/empleado.json", $empleadoJson);
+				$response = ["rst" => 1, "msj"=>"empleado Actualizado"];
 				echo json_encode($response);
 				exit;
 			} else {
@@ -64,21 +61,18 @@
 				$tmpItem["ape_paterno"] = $_POST["ape_paterno"];
 				$tmpItem["ape_materno"] = $_POST["ape_materno"];
 				$tmpItem["sexo"] = $_POST["sexo"];
-				$tmpItem["carrera"] = $_POST["carrera"];
-				$tmpItem["grado"] = $_POST["grado"];
-				$tmpItem["universidad"] = $_POST["universidad"];
-				$tmpItem["anio_egreso"] = (int)$_POST["anio_egreso"];
 
+				
 				$tmpItem["created_at"] = date("Y-m-d H:i:s");
 				$tmpItem["updated_at"] = "";
 				$tmpItem["deleted_at"] = "";
 
-				$size = count($usuariosData);
+				$size = count($empleadosData);
 				$size = $size +1;
-				$usuariosData[$size] = $tmpItem;
-				$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
-				file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
-				$response = ["rst" => 1, "msj"=>"Usuario Creado"];
+				$empleadosData[$size] = $tmpItem;
+				$empleadoJson = json_encode($empleadosData, JSON_UNESCAPED_UNICODE);
+				file_put_contents(__DIR__."/resources/assets/js/empleado.json", $empleadoJson);
+				$response = ["rst" => 1, "msj"=>"empleado Creado"];
 				echo json_encode($response);
 				exit;
 			}
@@ -94,7 +88,7 @@
 		<?php
 			include __DIR__."/resources/views/includes/head.phtml";
 		?>
-		<title>Usuarios</title>
+		<title>empleados</title>
 	</head>
 	<body>
 		<?php
@@ -102,19 +96,19 @@
 		?>
 		<div class="container">
 			<?php 
-				//echo file_get_contents(__DIR__."/resources/assets/js/usuario.json"); exit;
-				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
-				$usuariosData = json_decode($usuarioJson, true);
+				//echo file_get_contents(__DIR__."/resources/assets/js/empleado.json"); exit;
+				$empleadoJson = file_get_contents(__DIR__."/resources/assets/js/empleado.json");
+				$empleadosData = json_decode($empleadoJson, true);
 			?>
 			<div class="box box-primary content-table">
-				<h1>Listado de Usuarios <div style="width: auto; display: inline-block; float: right;">
+				<h1>Listado de empleados <div style="width: auto; display: inline-block; float: right;">
 					<a href="#" class="btn btn-primary"
 						data-toggle="modal"
-						data-target="#mdlUsuario">
+						data-target="#mdlEmpleado">
 						<i class="fas fa-plus"></i> Agregar</a>
 					</div></h1>
 			<div class="table-responsive-md">
-  				<table id="table-usuarios" class="table table-striped table-bordered nowrap" style="width:100%">
+  				<table id="table-empleados" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>
 						    <tr>
 						      <th>#</th>
@@ -127,9 +121,9 @@
 						    </tr>
 						</thead>
 						<tbody>
-						  	<?php /*
-						  			//print_r($usuariosData); exit;
-						    		foreach ($usuariosData as $key => $value) {
+						  		<?php 
+						  			//print_r($empleadosData); exit;
+						    		foreach ($empleadosData as $key => $value) {
 						    			$tmpIndex = (int)$key;
 						    			if ($value["deleted_at"] == "") {
 						    	?>
@@ -143,7 +137,7 @@
 							      <td>
 							      	<a href="#"
 							      		data-toggle="modal"
-							      		data-target="#mdlUsuario"
+							      		data-target="#mdlEmpleado"
 							      		class="btn btn-primary"
 							      		data-id="<?php echo $key;?>">
 							      		<i class="fas fa-pencil-alt"></i>
@@ -154,7 +148,7 @@
 							      </td>
 							    </tr>
 							<?php }
-							} */?>
+							} ?>
 						</tbody>
 				</table>
 			</div>
@@ -162,20 +156,25 @@
 			
 		</div>
 		<?php 
-			include __DIR__."/resources/views/modal/mdl_usuario.phtml";
+			include __DIR__."/resources/views/modal/mdl_empleado.phtml";
 		?>
 		<?php
 			include __DIR__."/resources/views/includes/script.phtml";
 			include __DIR__."/resources/views/includes/loading.phtml";
 		?>
 		<script type="text/javascript">
-			var table = $('#table-usuarios').DataTable({
+			var table = $('#table-empleados').DataTable({
 			   	"language": {
 			        "url": "/Spanish.json"
 			    },
 			    responsive: true
 			});
+			$(document).ready(function() {
+			    
+			 
+			    //new $.fn.dataTable.FixedHeader( table );
+			} );
 		</script>
-		<script type="text/javascript" src="js/web/usuario_list.js"></script>
+		<script type="text/javascript" src="js/web/empleado.js"></script>
 	</body>
 </html>

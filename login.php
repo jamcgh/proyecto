@@ -1,25 +1,28 @@
 <?php 
 	session_start();
 	if (isset($_POST) && count($_POST) > 0) {
-		$json = file_get_contents(__DIR__."/resources/assets/js/login.json");
-		$jsonLogin = json_decode(file_get_contents(__DIR__."/resources/assets/js/login.json"), true);
-		if (isset($jsonLogin["user"]) && isset($jsonLogin["password"])) {
-			$userPost = $_POST["user"];
-			$passwordPost = $_POST["password"];
-			if ($userPost == $jsonLogin["user"] && $passwordPost == $jsonLogin["password"]) {
-				$_SESSION["user"] = [];
-				$_SESSION["user"]["name"] = $userPost;
-				unset($_POST["user"]);
-				unset($_POST["password"]);
-				$response = ["rst" => 1, "msj" => "Haz accedido Correctamente"];
-				echo json_encode($response); exit;
-				//header("Location: home.php");
-			} else {
-				$response = ["rst" => 2, "msj" => "Tus credenciales son Incorrectas!!!"];
-				echo json_encode($response); exit;
-			}
+				$json = file_get_contents(__DIR__."/resources/assets/js/login.json");
+				$jsonLogin = json_decode(file_get_contents(__DIR__."/resources/assets/js/login.json"), true);
+				
+				if (isset($jsonLogin["user"]) && isset($jsonLogin["password"])) {
+					$userPost = $_POST["user"];
+					$passwordPost = $_POST["password"];
+					if ($userPost == $jsonLogin["user"] && $passwordPost == $jsonLogin["password"]) {
+						$_SESSION["user"] = [1];
+						$_SESSION["user"]["name"] = $userPost;
+						unset($_POST["user"]);
+						unset($_POST["password"]);
+						$response = ["rst" => 1, "msj" => "Haz accedido Correctamente"];
+						echo json_encode($response); exit;
+						//header("Location: home.php");
+					} else {
+						$response = ["rst" => 2, "msj" => "Tus credenciales son Incorrectas!!!"];
+						echo json_encode($response); exit;
+					}
+				}
+			
+				
 		}
-	}
 	if (session_status()) {
 		if (isset($_SESSION["user"])) {
 			header("Location: home.php");
@@ -41,7 +44,7 @@
 		    margin: 0px auto;
 		}
 		body{
-			background-image: url(img/among.jpg);
+			background-image: url(img/market.jpg);
 		    background-repeat: no-repeat;
 		    background-size: cover;
 		    background-position: center top;
