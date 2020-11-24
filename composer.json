@@ -1,0 +1,14 @@
+{
+    "require": {
+        "vlucas/phpdotenv": "^5.2",
+        "illuminate/database": "^7.29"
+    },
+    "autoload": {
+       "classmap": [
+           "App"
+       ],
+       "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}

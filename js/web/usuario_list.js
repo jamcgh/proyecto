@@ -86,4 +86,43 @@ $(document).delegate(".btn-delete", "click", function(e) {
 		    	})
 		  }
 	});
-})
+});
+
+var Usuario = {
+	list : function(obj) {
+		showLoading();
+		$.ajax({
+			type : "GET",
+			url : "usuario_ajax.php?action=list",
+			success : function(obj) {
+				console.log(obj);
+				var objData = JSON.parse(obj);
+				table.clear().draw();
+	            for(var i in objData) {
+	            	let index = parseInt(i);
+	            	let fila = [];
+	            	index++;
+	                fila.push(index);
+	                fila.push(objData[i].nombres);
+	                fila.push(objData[i].ape_paterno);
+	                fila.push(objData[i].ape_materno);
+	                fila.push(objData[i].sexo);
+	                fila.push(objData[i].updated_at);
+	                var btn = "";
+	                btn+= "<a href='#'";
+						btn+="data-toggle='modal' ";
+						btn+="data-target='#mdlUsuario' ";
+						btn+="class='btn btn-primary' ";
+						btn+="data-id='"+objData[i].id+"'>";
+						btn+="<i class='fas fa-pencil-alt'></i>";
+						btn+="</a>";
+	                fila.push(btn);
+	                console.log(fila);
+	                table.row.add(fila).draw();
+	            }
+	            removeLoading();
+			}
+		});
+	}
+};
+Usuario.list();
