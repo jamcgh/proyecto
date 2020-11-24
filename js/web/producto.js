@@ -1,40 +1,35 @@
-$('#mdlUsuario').on('show.bs.modal', function (event) {
+$('#mdlProducto').on('show.bs.modal', function (event) {
 	var id = $(event.relatedTarget).data("id");
 	if (typeof id !=undefined && typeof id !="undefined") {
 		showLoading();
-		var usuario = $.ajax({
+		var producto = $.ajax({
 			type : "GET",
-			url : "usuario.php",
+			url : "producto.php",
 			data : {id: id},
 			success : function(obj) {
 				var objData = JSON.parse(obj);
 				$("#txt_id").val(objData.id);
-				$("#txt_nombres").val(objData.nombres);
-				$("#txt_ape_paterno").val(objData.ape_paterno);
-				$("#txt_ape_materno").val(objData.ape_materno);
-				$("#slct_sexo").val(objData.sexo);
-				$("#txt_carrera").val(objData.carrera);
-				$("#txt_grado").val(objData.grado);
-				$("#txt_universidad").val(objData.universidad);
-				$("#slct_anio_egreso").val(objData.anio_egreso);
+				$("#txt_nombreproducto").val(objData.nombreproducto);
+				$("#txt_tipo").val(objData.tipo);
+				$("#txt_descripcion").val(objData.descripcion);
 				removeLoading();
 			}
 		});
 	}
 
 });
-$('#mdlUsuario').on('show.bs.modal', function (event) {
+$('#mdlProducto').on('show.bs.modal', function (event) {
 	$("input[type=text], select, #txt_id").val("");
 });
 $("#btn-guardar").click(function() {
-	$("#form-usuario").submit();
+	$("#form-producto").submit();
 });
-$("#form-usuario").submit(function() {
+$("#form-producto").submit(function() {
 	showLoading();
 	$.ajax({
 		type : "POST",
-		url : "usuario.php",
-		data : $("#form-usuario").serialize(),
+		url : "producto.php",
+		data : $("#form-producto").serialize(),
 		success : function(obj) {
 			var objData = JSON.parse(obj);
 			if (parseInt(objData.rst) == 1) {
@@ -46,7 +41,7 @@ $("#form-usuario").submit(function() {
 				removeLoading();
 				setTimeout(function() {
 					showLoading();
-					window.location.href="usuario.php";
+					window.location.href="producto.php";
 				}, 2000);
 			} else {
 				Swal.fire({
@@ -73,7 +68,7 @@ $(".btn-delete").click(function(e) {
 		  if (result.isConfirmed) {
 		    	$.ajax({
 		    		type : "GET",
-		    		url : "usuario.php?action=delete&id="+id,
+		    		url : "producto.php?action=delete&id="+id,
 		    		success : function(obj) {
 		    			var objData = JSON.parse(obj);
 		    			Swal.fire(

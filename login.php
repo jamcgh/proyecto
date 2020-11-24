@@ -41,7 +41,7 @@
 		    margin: 0px auto;
 		}
 		body{
-			background-image: url(img/isil.jpg);
+			background-image: url(img/among.jpg);
 		    background-repeat: no-repeat;
 		    background-size: cover;
 		    background-position: center top;

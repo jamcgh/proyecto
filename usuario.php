@@ -10,7 +10,6 @@
 						$tmpId = $_GET["id"];
 						$usuariosData[$tmpId]["deleted_at"] = date("Y-m-d H:i:s");
 						$usuarioJson = json_encode($usuariosData, JSON_UNESCAPED_UNICODE);
-						echo $usuarioJson; exit;
 						file_put_contents(__DIR__."/resources/assets/js/usuario.json", $usuarioJson);
 						$response = ["rst" => 1, "msj"=>"Usuario Eliminado"];
 						echo json_encode($response);
@@ -21,7 +20,8 @@
 						# code...
 						break;
 				}
-			} elseif (isset($_GET["id"])) {
+			}
+			if (isset($_GET["id"])) {
 				$usuarioJson = file_get_contents(__DIR__."/resources/assets/js/usuario.json");
 				$usuariosData = json_decode($usuarioJson, true);
 				$tmpId = $_GET["id"];
@@ -68,7 +68,7 @@
 				$tmpItem["grado"] = $_POST["grado"];
 				$tmpItem["universidad"] = $_POST["universidad"];
 				$tmpItem["anio_egreso"] = (int)$_POST["anio_egreso"];
-
+				
 				$tmpItem["created_at"] = date("Y-m-d H:i:s");
 				$tmpItem["updated_at"] = "";
 				$tmpItem["deleted_at"] = "";
