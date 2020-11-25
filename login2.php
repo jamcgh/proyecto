@@ -1,33 +1,7 @@
 <?php 
 	session_start();
-	if (isset($_POST) && count($_POST) > 0) {
-				$json = file_get_contents(__DIR__."/resources/assets/js/login.json");
-				$jsonLogin = json_decode(file_get_contents(__DIR__."/resources/assets/js/login.json"), true);
-				
-				if (isset($jsonLogin["user"]) && isset($jsonLogin["password"])) {
-					$userPost = $_POST["user"];
-					$passwordPost = $_POST["password"];
-					if ($userPost == $jsonLogin["user"] && $passwordPost == $jsonLogin["password"]) {
-						$_SESSION["user"] = [1];
-						$_SESSION["user"]["name"] = $userPost;
-						unset($_POST["user"]);
-						unset($_POST["password"]);
-						$response = ["rst" => 1, "msj" => "Haz accedido Correctamente"];
-						echo json_encode($response); exit;
-						//header("Location: home.php");
-					} else {
-						$response = ["rst" => 2, "msj" => "Tus credenciales son Incorrectas!!!"];
-						echo json_encode($response); exit;
-					}
-				}
-			
-				
-		}
-	if (session_status()) {
-		if (isset($_SESSION["user"])) {
-			header("Location: home.php");
-		}
-	}
+	include __DIR__."/enviroment.php";
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,7 +31,8 @@
 		    padding: 10px 5px;
 		    border-radius: 10px;
 		    box-shadow: 2px 2px 2px #cacaca;
-		    color: #fff;
+		    color: #fff
+			text-align: center;
 		}
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -66,21 +41,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body class="login">
-	<div class="content-login">
-		<h1>Acceso al Sistema</h1>
-		<div class="container">
-			<form action="login.php" method="POST" id="form-login">
+    <body class="login">
+        <div class="content-login">
+            <h1>Acceso al Sistema</h1>
+            <div class="container">
+			<form action="login2.php" method="POST" id="form-login">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<input type="text" name="user" placeholder="Usuario" required class="form-control" minlength="3" maxlength="20" />
+					</span><input type="text" name="user" required class="form-control" placeholder="Usuario" minlength="3" maxlength="20" />
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
-						<input type="password" name="password" placeholder="Contraseña" required class="form-control" minlength="8" maxlength="20">
+					<input type="password" name="password" required class="form-control"  placeholder="Contraseña" minlength="8" maxlength="20">
 					</div>
 				</div>
 				<div  class="col-md-12">
@@ -89,7 +68,7 @@
 			</div>
 			</form>
 		</div>
-	</div>
+        </div>
 	
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>

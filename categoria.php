@@ -48,7 +48,7 @@
 				//print_r($tmpItem); exit;
 				$categoriaJson = json_encode($categoriasData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/categoria.json", $categoriaJson);
-				$response = ["rst" => 1, "msj"=>"categoria Actualizado"];
+				$response = ["rst" => 1, "msj"=>"Categoria Actualizado"];
 				echo json_encode($response);
 				exit;
 			} else {
@@ -80,7 +80,7 @@
 		<?php
 			include __DIR__."/resources/views/includes/head.phtml";
 		?>
-		<title>categorias</title>
+		<title>Categorias</title>
 	</head>
 	<body>
 		<?php
@@ -93,19 +93,19 @@
 				$categoriasData = json_decode($categoriaJson, true);
 			?>
 			<div class="box box-primary content-table">
-				<h1>Listado de categorias <div style="width: auto; display: inline-block; float: right;">
+				<h1>Listado de Categorias <div style="width: auto; display: inline-block; float: right;">
 					<a href="#" class="btn btn-primary"
 						data-toggle="modal"
 						data-target="#mdlCategoria">
-						<i class="fas fa-plus"></i> Agregar</a>
+						<i class="fas fa-plus"></i>Agregar</a>
 					</div></h1>
 			<div class="table-responsive-md">
   				<table id="table-categorias" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>
 						    <tr>
 						      <th>#</th>
-						      <th>tipo</th>
-						      <th>descripcion</th>
+						      <th>Tipo</th>
+						      <th>Descripcion</th>
 						      <th>U.Act.</th>
 						      <th>[]</th>
 						    </tr>

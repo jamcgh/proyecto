@@ -10,13 +10,9 @@ $('#mdlUsuario').on('show.bs.modal', function (event) {
 				var objData = JSON.parse(obj);
 				$("#txt_id").val(objData.id);
 				$("#txt_nombres").val(objData.nombres);
-				$("#txt_ape_paterno").val(objData.ape_paterno);
-				$("#txt_ape_materno").val(objData.ape_materno);
-				$("#slct_sexo").val(objData.sexo);
-				$("#txt_carrera").val(objData.carrera);
-				$("#txt_grado").val(objData.grado);
-				$("#txt_universidad").val(objData.universidad);
-				$("#slct_anio_egreso").val(objData.anio_egreso);
+				$("#txt_apellidos").val(objData.apellidos);
+				$("#txt_usuario").val(objData.usuario);
+				$("#slct_estado").val(objData.estado);
 				removeLoading();
 			}
 		});

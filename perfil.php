@@ -6,12 +6,12 @@
 				switch ($_GET["action"]) {
 					case 'delete':
 						$perfilJson = file_get_contents(__DIR__."/resources/assets/js/perfil.json");
-						$perfilsData = json_decode($perfilJson, true);
+						$perfilData = json_decode($perfilJson, true);
 						$tmpId = $_GET["id"];
-						$perfilsData[$tmpId]["deleted_at"] = date("Y-m-d H:i:s");
-						$perfilJson = json_encode($perfilsData, JSON_UNESCAPED_UNICODE);
+						$perfilData[$tmpId]["deleted_at"] = date("Y-m-d H:i:s");
+						$perfilJson = json_encode($perfilData, JSON_UNESCAPED_UNICODE);
 						file_put_contents(__DIR__."/resources/assets/js/perfil.json", $perfilJson);
-						$response = ["rst" => 1, "msj"=>"perfil Eliminado"];
+						$response = ["rst" => 1, "msj"=>"Perfil Eliminado"];
 						echo json_encode($response);
 						exit;
 						break;
@@ -23,11 +23,11 @@
 			}
 			if (isset($_GET["id"])) {
 				$perfilJson = file_get_contents(__DIR__."/resources/assets/js/perfil.json");
-				$perfilsData = json_decode($perfilJson, true);
+				$perfilData = json_decode($perfilJson, true);
 				$tmpId = $_GET["id"];
-				if (isset($perfilsData[$tmpId])) {
-					$perfilsData[$tmpId]["id"] = $tmpId;
-					echo json_encode($perfilsData[$tmpId]);
+				if (isset($perfilData[$tmpId])) {
+					$perfilData[$tmpId]["id"] = $tmpId;
+					echo json_encode($perfilData[$tmpId]);
 					exit;
 				}
 
@@ -37,16 +37,19 @@
 	if (isset($_POST)) {
 		if (count($_POST) > 0) {
 			$perfilJson = file_get_contents(__DIR__."/resources/assets/js/perfil.json");
-			$perfilsData = json_decode($perfilJson, true);
+			$perfilData = json_decode($perfilJson, true);
 			if (isset($_POST["id"]) && $_POST["id"] !="") {
 				$tmpId = $_POST["id"];
-				$tmpItem = $perfilsData[$tmpId];
+				$tmpItem = $perfilData[$tmpId];
 				//print_r($tmpItem);
-				$perfilsData[$tmpId]["nombre"] = $_POST["nombre"];
-				$perfilsData[$tmpId]["codigo"] = $_POST["codigo"];
-				$perfilsData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
+				$perfilData[$tmpId]["nombre"] = $_POST["nombre"];
+				$perfilData[$tmpId]["apellido"] = $_POST["apellido"];
+				$perfilData[$tmpId]["edad"] = $_POST["edad"];
+				$perfilData[$tmpId]["sexo"] = $_POST["sexo"];
+				$perfilData[$tmpId]["salario"] = $_POST["salario"];
+				$perfilData[$tmpId]["updated_at"] = date("Y-m-d H:i:s");
 				//print_r($tmpItem); exit;
-				$perfilJson = json_encode($perfilsData, JSON_UNESCAPED_UNICODE);
+				$perfilJson = json_encode($perfilData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/perfil.json", $perfilJson);
 				$response = ["rst" => 1, "msj"=>"perfil Actualizado"];
 				echo json_encode($response);
@@ -54,15 +57,18 @@
 			} else {
 				$tmpItem = [];
 				$tmpItem["nombre"] = $_POST["nombre"];
-				$tmpItem["codigo"] = $_POST["codigo"];				
-				$tmpItem["created_at"] = date("Y-m-d H:i:s");
+				$tmpItem["apellido"] = $_POST["apellido"];	
+				$tmpItem["edad"] = $_POST["edad"];	
+				$tmpItem["sexo"] = $_POST["sexo"];
+				$tmpItem["salario"] = $_POST["salario"];		
+				$tmpItem["created_at"] = date("Y-m-d H:i:s");	
 				$tmpItem["updated_at"] = "";
 				$tmpItem["deleted_at"] = "";
 
-				$size = count($perfilsData);
+				$size = count($perfilData);
 				$size = $size +1;
-				$perfilsData[$size] = $tmpItem;
-				$perfilJson = json_encode($perfilsData, JSON_UNESCAPED_UNICODE);
+				$perfilData[$size] = $tmpItem;
+				$perfilJson = json_encode($perfilData, JSON_UNESCAPED_UNICODE);
 				file_put_contents(__DIR__."/resources/assets/js/perfil.json", $perfilJson);
 				$response = ["rst" => 1, "msj"=>"perfil Creado"];
 				echo json_encode($response);
@@ -80,7 +86,7 @@
 		<?php
 			include __DIR__."/resources/views/includes/head.phtml";
 		?>
-		<title>perfiles</title>
+		<title>Perfiles</title>
 	</head>
 	<body>
 		<?php
@@ -90,14 +96,14 @@
 			<?php 
 				//echo file_get_contents(__DIR__."/resources/assets/js/perfil.json"); exit;
 				$perfilJson = file_get_contents(__DIR__."/resources/assets/js/perfil.json");
-				$perfilsData = json_decode($perfilJson, true);
+				$perfilData = json_decode($perfilJson, true);
 			?>
 			<div class="box box-primary content-table">
 				<h1>Listado de perfiles <div style="width: auto; display: inline-block; float: right;">
 					<a href="#" class="btn btn-primary"
 						data-toggle="modal"
 						data-target="#mdlPerfil">
-						<i class="fas fa-plus"></i> Agregar</a>
+						<i class="fas fa-plus"></i>Agregar</a>
 					</div></h1>
 			<div class="table-responsive-md">
   				<table id="table-perfils" class="table table-striped table-bordered nowrap" style="width:100%">
@@ -105,22 +111,30 @@
 						    <tr>
 						      <th>#</th>
 						      <th>Nombre</th>
-						      <th>Codigo</th>
-						      <th>U.Act.</th>
+						      <th>Apellido</th>
+						      <th>Edad</th>
+							  <th>Sexo</th>
+							  <th>F. Ingreso</th>
+							  <th>Salario</th>
+							  <th>U.Act.</th>
 						      <th>[]</th>
 						    </tr>
 						</thead>
 						<tbody>
 						  		<?php 
-						  			//print_r($perfilsData); exit;
-						    		foreach ($perfilsData as $key => $value) {
+						  			//print_r($perfilData); exit;
+						    		foreach ($perfilData as $key => $value) {
 						    			$tmpIndex = (int)$key;
 						    			if ($value["deleted_at"] == "") {
 						    	?>
 							    <tr>
 							      <th><?php echo $tmpIndex;?></th>
 							      <td><?php echo $value["nombre"];?></td>
-							      <td><?php echo $value["codigo"];?></td>
+							      <td><?php echo $value["apellido"];?></td>
+								  <td><?php echo $value["edad"];?></td>
+								  <td><?php echo $value["sexo"];?></td>
+								  <td><?php echo $value["created_at"];?></td>
+								  <td><?php echo $value["salario"];?></td>
 							      <td><?php echo $value["updated_at"];?></td>
 							      <td>
 							      	<a href="#"

@@ -14,26 +14,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos Generales</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profesionales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contacto</a>
-                </li>
               </ul>
               <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <?php 
                           include __DIR__."/../partials/tab_usuario_general.phtml";
                         ?>
-                  </div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                      <?php 
-                            include __DIR__."/../partials/tab_usuario_profesional.phtml";
-                          ?>
-                  </div>
-                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    
                   </div>
               </div>
               <input type="hidden" name="id" id="txt_id" value="">

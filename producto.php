@@ -82,7 +82,7 @@
 		<?php
 			include __DIR__."/resources/views/includes/head.phtml";
 		?>
-		<title>productos</title>
+		<title>Productos</title>
 	</head>
 	<body>
 		<?php
@@ -106,9 +106,9 @@
 						<thead>
 						    <tr>
 						      <th>#</th>
-						      <th>producto</th>
-						      <th>tipo</th>
-						      <th>descripcion</th>
+						      <th>Producto</th>
+						      <th>Tipo</th>
+						      <th>Descripcion</th>
 						      <th>U.Act.</th>
 						      <th>[]</th>
 						    </tr>

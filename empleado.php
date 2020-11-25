@@ -88,7 +88,7 @@
 		<?php
 			include __DIR__."/resources/views/includes/head.phtml";
 		?>
-		<title>empleados</title>
+		<title>Empleados</title>
 	</head>
 	<body>
 		<?php
@@ -101,14 +101,14 @@
 				$empleadosData = json_decode($empleadoJson, true);
 			?>
 			<div class="box box-primary content-table">
-				<h1>Listado de empleados <div style="width: auto; display: inline-block; float: right;">
+				<h1>Listado de Empleados <div style="width: auto; display: inline-block; float: right;">
 					<a href="#" class="btn btn-primary"
 						data-toggle="modal"
 						data-target="#mdlEmpleado">
-						<i class="fas fa-plus"></i> Agregar</a>
+						<i class="fas fa-plus"></i>Agregar</a>
 					</div></h1>
 			<div class="table-responsive-md">
-  				<table id="table-empleados" class="table table-striped table-bordered nowrap" style="width:100%">
+  				<table id="table-empleado" class="table table-striped table-bordered nowrap" style="width:100%">
 						<thead>
 						    <tr>
 						      <th>#</th>
@@ -163,7 +163,7 @@
 			include __DIR__."/resources/views/includes/loading.phtml";
 		?>
 		<script type="text/javascript">
-			var table = $('#table-empleados').DataTable({
+			var table = $('#table-empleado').DataTable({
 			   	"language": {
 			        "url": "/Spanish.json"
 			    },
